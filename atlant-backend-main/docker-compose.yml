@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: atlant-postgres
+    environment:
+      POSTGRES_DB: atlant
+      POSTGRES_USER: atlant
+      POSTGRES_PASSWORD: atlant_local_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - atlant-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  atlant-postgres-data:

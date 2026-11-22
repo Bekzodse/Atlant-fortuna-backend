@@ -1,0 +1,10 @@
+package sayyeed.dev.atlantbackend.enums;
+
+public enum ProductCategoryEnum {
+    WATER_PURIFICATION_FILTERS,
+    CARBONATED_WATER_EQUIPMENT,
+    HOUSEHOLD_WATER_FILTERS,
+    WATER_DISPENSERS_COOLERS,
+    WATER_FILTER_SPARE_PARTS,
+    OTHER_PRODUCTS_EQUIPMENT
+}

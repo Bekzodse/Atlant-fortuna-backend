@@ -1,0 +1,17 @@
+package sayyeed.dev.atlantbackend.dto.reels;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
+import lombok.Setter;
+import sayyeed.dev.atlantbackend.dto.AttachDTO;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ReelResponseDTO {
+    private String id;
+    private AttachDTO attach;
+    private LocalDateTime createdAt;
+}

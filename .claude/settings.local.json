@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Read(//private/tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ru --max-time 5)",
+      "Bash(curl -s http://localhost:3000/ru --max-time 20)",
+      "Bash(curl -s http://localhost:3001/login --max-time 20)",
+      "Read(//opt/homebrew/Cellar/**)",
+      "Read(//usr/local/Cellar/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ru --max-time 10)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/login --max-time 10)",
+      "Bash(curl -s -D - -o /tmp/railway_body.json \"https://atlant-backend-production.up.railway.app/\" --max-time 15)",
+      "Read(//usr/local/opt/openjdk@17/**)",
+      "Bash(/usr/local/opt/openjdk@17/bin/java -version)",
+      "Bash(npm run *)",
+      "Bash(echo \"frontend PID: $!\")",
+      "Bash(curl -sL \"https://api.github.com/repos/adoptium/temurin17-binaries/releases/latest\" --max-time 30 -o /tmp/temurin_release.json)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(mkdir -p ~/jdks)",
+      "Bash(mv /tmp/temurin_expand/pkg/net.temurin.17.jdk.pkg/payload_extracted/Library/Java/JavaVirtualMachines/temurin-17.jdk ~/jdks/)",
+      "Read(//Users/farkhodovabdulaziz/jdks/temurin-17.jdk/Contents/Home/**)",
+      "Bash(~/jdks/temurin-17.jdk/Contents/Home/bin/java -version)",
+      "Bash(PGPASSWORD=atlant_local_dev psql -h localhost -p 5433 -U atlant -d atlant -c \"SELECT id, label, group_id, active FROM telegram_chats;\")",
+      "Bash(PGPASSWORD=atlant_local_dev psql -h localhost -p 5433 -U atlant -d atlant -c \"SELECT id, label, active FROM telegram_bots;\")"
+    ]
+  }
+}

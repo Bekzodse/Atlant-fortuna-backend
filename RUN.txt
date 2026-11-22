@@ -1,0 +1,195 @@
+ATLANT PROJECT RUN COMMANDS
+==========================
+
+QUICK COPY-PASTE START
+----------------------
+
+Open four Terminal tabs. Paste one command into each tab.
+
+Tab 1 - PostgreSQL:
+
+pg_ctl -D /opt/homebrew/var/postgres status >/dev/null 2>&1 || pg_ctl -D /opt/homebrew/var/postgres -l /opt/homebrew/var/postgres/server.log -o "-p 5433 -h 127.0.0.1" start
+
+Tab 2 - Backend:
+
+export JAVA_HOME=/opt/homebrew/opt/openjdk@17; export PATH="$JAVA_HOME/bin:$PATH"; cd /Users/macbookprom2pro/Downloads/Atlanta/atlant-backend-main; ./mvnw spring-boot:run
+
+Tab 3 - Public website:
+
+export PATH=/opt/homebrew/opt/node@20/bin:$PATH; cd /Users/macbookprom2pro/Downloads/Atlanta/atlant-frontend-main; npx next dev -p 3000
+
+Tab 4 - Admin dashboard:
+
+export PATH=/opt/homebrew/opt/node@20/bin:$PATH; cd /Users/macbookprom2pro/Downloads/Atlanta/atlant_dashboard-main; npm run dev
+
+Open after all four commands are running:
+
+- Public website: http://localhost:3000
+- Admin dashboard: http://localhost:3001/login
+- Backend Swagger: http://localhost:8080/swagger-ui.html
+
+Admin login:
+
+Email: bekzod@local.test
+Password: 111111
+
+To stop each app, focus its Terminal tab and press Control + C.
+To stop PostgreSQL after stopping the apps, run:
+
+pg_ctl -D /opt/homebrew/var/postgres stop
+
+
+The project contains three independent applications:
+
+- Backend API: Spring Boot on port 8080
+- Public frontend: Next.js on port 3000
+- Admin dashboard: Next.js on port 3001
+
+Prerequisites
+-------------
+
+- Java 17
+- Node.js 20
+- PostgreSQL
+- npm dependencies installed in both frontend projects
+
+
+1. Start PostgreSQL
+-------------------
+
+Run this in a terminal:
+
+pg_ctl -D /opt/homebrew/var/postgres status >/dev/null 2>&1 || \
+pg_ctl -D /opt/homebrew/var/postgres \
+  -l /opt/homebrew/var/postgres/server.log \
+  -o "-p 5433 -h 127.0.0.1" start
+
+The local database is expected at:
+
+- Host: 127.0.0.1
+- Port: 5433
+- Database: atlant
+- Username: atlant
+
+
+2. Start the backend
+--------------------
+
+Run in a separate terminal:
+
+export JAVA_HOME=/opt/homebrew/opt/openjdk@17
+export PATH="$JAVA_HOME/bin:$PATH"
+
+cd /Users/macbookprom2pro/Downloads/Atlanta/atlant-backend-main
+./mvnw spring-boot:run
+
+Backend URL:
+
+http://localhost:8080
+
+Swagger UI:
+
+http://localhost:8080/swagger-ui.html
+
+
+3. Start the public frontend
+----------------------------
+
+Run in a separate terminal:
+
+export PATH=/opt/homebrew/opt/node@20/bin:$PATH
+
+cd /Users/macbookprom2pro/Downloads/Atlanta/atlant-frontend-main
+npx next dev -p 3000
+
+Public website:
+
+http://localhost:3000
+
+The public frontend uses the default Next.js dev command directly because
+the current Turbopack/SWC setup may fail on this machine.
+
+
+4. Start the admin dashboard
+----------------------------
+
+Run in a separate terminal:
+
+export PATH=/opt/homebrew/opt/node@20/bin:$PATH
+
+cd /Users/macbookprom2pro/Downloads/Atlanta/atlant_dashboard-main
+npm run dev
+
+Admin dashboard:
+
+http://localhost:3001/login
+
+Local admin credentials:
+
+Email:    bekzod@local.test
+Password: 111111
+
+
+5. Verify that all applications are running
+--------------------------------------------
+
+Run from any terminal:
+
+curl -I http://localhost:8080/swagger-ui.html
+curl -I http://localhost:3000
+curl -I http://localhost:3001
+
+Expected responses:
+
+- Backend: 302 redirect to Swagger UI
+- Public frontend: 307 redirect to the default locale
+- Admin dashboard: 307 redirect to /login
+
+
+6. Telegram configuration
+-------------------------
+
+Telegram bot and chat credentials are intentionally not stored in the
+codebase. Configure them from the admin dashboard after logging in.
+
+Telegram settings page:
+
+http://localhost:3001/dashboard/telegram
+
+Before testing messages:
+
+1. Add the Telegram bot token.
+2. Add the correct Telegram group/chat ID.
+3. Add the bot to the target group.
+4. Give the bot permission to send messages.
+5. Use the dashboard "Test message" action.
+
+
+7. Stop the applications
+------------------------
+
+In each backend/frontend terminal, press:
+
+Control + C
+
+Stop PostgreSQL when it is no longer needed:
+
+pg_ctl -D /opt/homebrew/var/postgres stop
+
+
+8. Install dependencies only when needed
+-----------------------------------------
+
+Public frontend:
+
+export PATH=/opt/homebrew/opt/node@20/bin:$PATH
+cd /Users/macbookprom2pro/Downloads/Atlanta/atlant-frontend-main
+npm install
+
+Admin dashboard:
+
+export PATH=/opt/homebrew/opt/node@20/bin:$PATH
+cd /Users/macbookprom2pro/Downloads/Atlanta/atlant_dashboard-main
+npm install
+
+Do not run npm install every time the project is started.

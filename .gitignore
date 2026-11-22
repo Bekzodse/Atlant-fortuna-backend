@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+.venv/
+.env
+.env.local
+!.env.example
+node_modules/
+.next/
+target/
+*.tsbuildinfo
